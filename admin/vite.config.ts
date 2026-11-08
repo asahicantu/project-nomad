@@ -1,21 +1,21 @@
 import { defineConfig } from 'vite'
-import { getDirname } from '@adonisjs/core/helpers'
-import inertia from '@adonisjs/inertia/client'
 import react from '@vitejs/plugin-react'
 import adonisjs from '@adonisjs/vite/client'
 import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-  plugins: [inertia({ ssr: { enabled: false } }), react(), tailwindcss(), adonisjs({ entrypoints: ['inertia/app/app.tsx'], reload: ['resources/views/**/*.edge'] })],
+  plugins: [react(), tailwindcss(), adonisjs({ entryPoints: ['inertia/app.tsx'], reload: ['resources/views/**/*.edge'] })],
 
   /**
    * Define aliases for importing modules from
    * your frontend code
    */
   resolve: {
+    // react-adonis-transmit ships its own nested React 18; force the app's single React copy.
+    dedupe: ['react', 'react-dom'],
     alias: {
-      '~/': `${getDirname(import.meta.url)}/inertia/`,
+      '~/': `${import.meta.dirname}/inertia/`,
     },
   },
   server: {

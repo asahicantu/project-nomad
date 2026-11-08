@@ -150,7 +150,7 @@ export interface IngestDrugDataJobParams {
  * `id` is a representative row id for the detail view; `labelCount` tells
  * the UI how many individual FDA set_ids collapsed into this result.
  */
-export interface DrugSearchResult {
+export type DrugSearchResult = {
   id: number
   brand_name: string | null
   generic_name: string | null
@@ -162,7 +162,7 @@ export interface DrugSearchResult {
 
 // ─── Detail DTO (full label body) ─────────────────────────────────────────────
 
-export interface DrugLabelDetail {
+export type DrugLabelDetail = {
   id: number
   set_id: string
   spl_id: string | null
@@ -218,7 +218,7 @@ export type DrugIngestPhase =
 export type DrugPhaseState = 'idle' | 'running' | 'completed' | 'failed'
 
 /** Download-phase sub-status. */
-export interface DrugDownloadStatus {
+export type DrugDownloadStatus = {
   state: DrugPhaseState
   partsDone: number
   totalParts: number
@@ -229,7 +229,7 @@ export interface DrugDownloadStatus {
 }
 
 /** Ingest-phase sub-status. */
-export interface DrugIngestPhaseStatus {
+export type DrugIngestPhaseStatus = {
   state: DrugPhaseState
   records: number
   /** Approx. total records from the manifest (0 if not known yet). Drives the counter + %. */
@@ -244,7 +244,7 @@ export interface DrugIngestPhaseStatus {
  * The combined two-phase status DTO returned to the client. `phase` is the
  * top-level state machine derived from the two sub-phases + rowCount.
  */
-export interface DrugIngestStatus {
+export type DrugIngestStatus = {
   phase: DrugIngestPhase
   download: DrugDownloadStatus
   ingest: DrugIngestPhaseStatus

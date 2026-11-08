@@ -6,7 +6,8 @@ import Map, {
   ScaleControl,
 } from 'react-map-gl/maplibre'
 import type { MapLayerMouseEvent, MapRef } from 'react-map-gl/maplibre'
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import { Protocol } from 'pmtiles'
@@ -20,6 +21,9 @@ import CoordinateOverlay from './CoordinateOverlay'
 import ViewMapMarkerPopup from './ViewMapMarkerPopup'
 import MapMarkerFormPopup from './MapMarkerFormPopup'
 import ScaleUnitToggle from './ScaleUnitSelector'
+
+// maplibre v6 can't find its worker once Vite bundles it, so point it at the bundled copy.
+maplibregl.setWorkerUrl(maplibreWorkerUrl)
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 

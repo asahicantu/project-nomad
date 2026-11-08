@@ -1,5 +1,5 @@
-import { NomadDiskInfo } from '../../types/system'
-import { Systeminformation } from 'systeminformation'
+import { type NomadDiskInfo } from '../../types/system'
+import { type Systeminformation } from 'systeminformation'
 import { formatBytes } from '~/lib/util'
 
 type DiskDisplayItem = {

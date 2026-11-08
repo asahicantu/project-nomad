@@ -1,4 +1,4 @@
-import { Job } from 'bullmq'
+import { type Job } from 'bullmq'
 import { QueueService } from '#services/queue_service'
 import { BenchmarkService } from '#services/benchmark_service'
 import type { RunBenchmarkJobParams } from '../../types/benchmark.js'

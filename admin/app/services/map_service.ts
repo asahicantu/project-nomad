@@ -1,7 +1,7 @@
-import { BaseStylesFile, MapLayer } from '../../types/maps.js'
+import { type BaseStylesFile, type MapLayer } from '../../types/maps.js'
 import {
-  DownloadRemoteSuccessCallback,
-  FileEntry,
+  type DownloadRemoteSuccessCallback,
+  type FileEntry,
 } from '../../types/files.js'
 import { doResumableDownloadWithRetry } from '../utils/downloads.js'
 import { extract } from 'tar'

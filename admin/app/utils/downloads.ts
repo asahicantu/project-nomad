@@ -1,6 +1,6 @@
 import {
-  DoResumableDownloadParams,
-  DoResumableDownloadWithRetryParams,
+  type DoResumableDownloadParams,
+  type DoResumableDownloadWithRetryParams,
 } from '../../types/downloads.js'
 import axios from 'axios'
 import { Transform } from 'stream'

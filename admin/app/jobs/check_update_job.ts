@@ -1,4 +1,4 @@
-import { Job } from 'bullmq'
+import { type Job } from 'bullmq'
 import { QueueService } from '#services/queue_service'
 import { DockerService } from '#services/docker_service'
 import { SystemService } from '#services/system_service'

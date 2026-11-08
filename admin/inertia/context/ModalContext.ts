@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, type ReactNode } from 'react'
 
 interface ModalContextProps {
   openModal: (content: ReactNode, id: string, preventClose?: boolean) => void

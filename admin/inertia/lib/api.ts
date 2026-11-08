@@ -1,20 +1,20 @@
-import axios, { AxiosError, AxiosInstance } from 'axios'
+import axios, { AxiosError, type AxiosInstance } from 'axios'
 import {
-  ListCatalogLanguagesResponse,
-  ListRemoteZimFilesResponse,
-  ListZimFilesResponse,
+  type ListCatalogLanguagesResponse,
+  type ListRemoteZimFilesResponse,
+  type ListZimFilesResponse,
 } from '../../types/zim'
-import { ServiceSlim } from '../../types/services'
-import { FileEntry } from '../../types/files'
-import { AppAutoUpdateStatus, AutoUpdateStatus, CheckLatestVersionResult, ContentAutoUpdateStatus, SystemInformationResponse, SystemUpdateStatus } from '../../types/system'
-import { DownloadJobWithProgress, WikipediaState } from '../../types/downloads'
+import { type ServiceSlim } from '../../types/services'
+import { type FileEntry } from '../../types/files'
+import { type AppAutoUpdateStatus, type AutoUpdateStatus, type CheckLatestVersionResult, type ContentAutoUpdateStatus, type SystemInformationResponse, type SystemUpdateStatus } from '../../types/system'
+import { type DownloadJobWithProgress, type WikipediaState } from '../../types/downloads'
 import type { Country, CountryCode, CountryGroup, MapExtractPreflight } from '../../types/maps'
-import { EmbedJobWithProgress, FileWarningsResult, StoredFileInfo } from '../../types/rag'
+import { type EmbedJobWithProgress, type FileWarningsResult, type StoredFileInfo } from '../../types/rag'
 import type { CategoryWithStatus, CollectionWithStatus, ContentUpdateCheckResult, CreatorPackWithStatus, ResourceUpdateInfo } from '../../types/collections'
 import { catchInternal } from './util'
-import { NomadChatResponse, NomadInstalledModel, NomadOllamaModel, OllamaChatRequest } from '../../types/ollama'
-import BenchmarkResult from '#models/benchmark_result'
-import { BenchmarkType, RunBenchmarkResponse, SubmitBenchmarkResponse, UpdateBuilderTagResponse } from '../../types/benchmark'
+import { type NomadChatResponse, type NomadInstalledModel, type NomadOllamaModel, type OllamaChatRequest } from '../../types/ollama'
+import type BenchmarkResult from '#models/benchmark_result'
+import { type BenchmarkType, type RunBenchmarkResponse, type SubmitBenchmarkResponse, type UpdateBuilderTagResponse } from '../../types/benchmark'
 import type { CreateMapMarkerPayload, MapMarkerResponse, UpdateMapMarkerPayload } from '../../types/maps'
 import type { ChatSource } from '../../types/chat'
 import { chatStreamErrorMessage } from './chat_stream.js'

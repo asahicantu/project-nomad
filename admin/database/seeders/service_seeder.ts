@@ -1,6 +1,6 @@
 import Service from '#models/service'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import { ModelAttributes } from '@adonisjs/lucid/types/model'
+import { type ModelAttributes } from '@adonisjs/lucid/types/model'
 import env from '#start/env'
 import { SERVICE_NAMES } from '../../constants/service_names.js'
 import { KIWIX_LIBRARY_CMD } from '../../constants/kiwix.js'

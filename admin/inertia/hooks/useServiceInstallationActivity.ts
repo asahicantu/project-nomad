@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTransmit } from 'react-adonis-transmit'
-import { InstallActivityFeedProps } from '~/components/InstallActivityFeed'
+import { type InstallActivityFeedProps } from '~/components/InstallActivityFeed'
 import { BROADCAST_CHANNELS } from '../../constants/broadcast'
 
 export default function useServiceInstallationActivity() {

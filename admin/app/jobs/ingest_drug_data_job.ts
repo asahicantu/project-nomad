@@ -1,10 +1,15 @@
-import { Job } from 'bullmq'
+import { type Job } from 'bullmq'
 import { promises as fsPromises } from 'node:fs'
 import { access, constants } from 'node:fs/promises'
 import { Writable } from 'node:stream'
 import logger from '@adonisjs/core/services/logger'
 import { QueueService } from '#services/queue_service'
-import { mapDrugLabelRecord, parseDownloadState, partZipPath } from '../../util/drug_labels.js'
+import {
+  loadResultsArrayStreams,
+  mapDrugLabelRecord,
+  parseDownloadState,
+  partZipPath,
+} from '../../util/drug_labels.js'
 import { STORAGE_BASE } from '#jobs/download_drug_data_job'
 import type {
   IngestDrugDataJobParams,
@@ -107,7 +112,7 @@ async function withUpsertTimeout<T>(
 }
 
 // ─── Local type aliases for yauzl callbacks ───────────────────────────────────
-// yauzl/stream-json are loaded via dynamic import() with @ts-ignore (see
+// yauzl is loaded via dynamic import() with @ts-ignore (see
 // streamIngestPart). The real @types ship in devDependencies and resolve on the
 // target machine; loading them lazily keeps the pure util/ helpers importable in
 // tests without the streaming deps. These local interfaces give the callback
@@ -427,44 +432,14 @@ export class IngestDrugDataJob {
     runningIngested: number,
     runningSkipped: number
   ): Promise<{ recordsIngested: number; recordsSkipped: number }> {
-    // Dynamic imports for the streaming deps (yauzl, stream-json). @ts-ignore
-    // covers local dev where node_modules hasn't been refreshed with the new
-    // deps yet; it is a no-op once the real @types are installed on the target
-    // machine, and it also covers stream-json's deep `.js` subpaths that the
-    // @types package doesn't map. Importing here (not at module top) keeps the
+    // Dynamic import for yauzl. @ts-ignore covers local dev where
+    // node_modules hasn't been refreshed with the dep yet; it is a no-op once the
+    // real @types are installed. Importing here (not at module top) keeps the
     // pure util/ helpers loadable in tests without these deps.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore — yauzl resolved at runtime from dependencies
     const yauzl = await import('yauzl')
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore — stream-json resolved at runtime from dependencies
-    const createParser = (await import('stream-json')).default.parser
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore — stream-json deep subpath resolved at runtime
-    const createPick = (await import('stream-json/filters/Pick.js')).default.pick
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore — stream-json deep subpath resolved at runtime
-    const createStreamArray = (await import('stream-json/streamers/StreamArray.js')).default.streamArray
-
-    // Defensive: stream-json 1.9.1 (CJS) exposes its factories only as
-    // `.default.parser` / `.default.pick` / `.default.streamArray` under ESM
-    // dynamic import — there is NO `parser`/`pick`/`streamArray` named export, so
-    // destructuring those silently yielded `undefined`. Calling an undefined
-    // "factory" then threw inside the yauzl openReadStream callback (not a
-    // promise), the process-level backstop swallowed the uncaughtException, the
-    // streamIngestPart promise never settled, and the 90s watchdog fired in a
-    // retry loop with zero records. THIS was the real ingest hang. Validate the
-    // imports here so any future interop slip fails loud in the async body.
-    if (
-      typeof createParser !== 'function' ||
-      typeof createPick !== 'function' ||
-      typeof createStreamArray !== 'function'
-    ) {
-      throw new Error(
-        'stream-json factory imports did not resolve to functions ' +
-          `(parser=${typeof createParser}, pick=${typeof createPick}, streamArray=${typeof createStreamArray})`
-      )
-    }
+    const createResultsArrayStreams = await loadResultsArrayStreams()
 
     let recordsIngested = 0
     let recordsSkipped = 0
@@ -555,9 +530,7 @@ export class IngestDrugDataJob {
 
             // The JSON envelope is { meta, results: [...] }
             // Pick the `results` path → StreamArray emits one record at a time
-            const jsonParser = createParser({ jsonStreaming: false })
-            const pick = createPick({ filter: 'results' })
-            const streamArray = createStreamArray()
+            const { jsonParser, pick, streamArray } = createResultsArrayStreams()
 
             // Writable that accumulates batches and flushes with back-pressure.
             // The callback is called only after the async upsert completes, which

@@ -21,7 +21,7 @@ type Props = {
   updateAvailable: boolean
   latestVersion: string
   currentVersion: string
-  earlyAccess: boolean
+  earlyAccess?: boolean
 }
 
 const STAGE_LABELS: Record<SystemUpdateStatus['stage'], string> = {

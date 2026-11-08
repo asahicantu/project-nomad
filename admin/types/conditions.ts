@@ -59,7 +59,7 @@ export interface ConditionsFile {
  * - `cautions`    Key safety notes, interactions, who should avoid.
  * - `sourceUrl`   Canonical NCCIH fact-sheet URL for the "Learn more" link.
  */
-export interface NaturalRemedy {
+export type NaturalRemedy = {
   slug: string
   name: string
   commonNames: string[]
@@ -106,7 +106,7 @@ export interface NaturalRemediesFile {
  * Slim condition shape for the browse grid — omits `searchTerms` (a
  * server-only search-implementation detail the client never needs).
  */
-export interface ConditionSummary {
+export type ConditionSummary = {
   slug: string
   label: string
   category: string

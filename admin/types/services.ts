@@ -1,4 +1,4 @@
-import Service from '#models/service'
+import type Service from '#models/service'
 
 export type ServiceSlim = Pick<
   Service,

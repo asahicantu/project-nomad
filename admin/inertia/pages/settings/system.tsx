@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react'
 import SettingsLayout from '~/layouts/SettingsLayout'
 import { SystemInformationResponse } from '../../../types/system'
+import type { SerializeJSONTypes } from '@adonisjs/core/types/transformers'
 import { formatBytes } from '~/lib/util'
 import { getAllDiskDisplayItems } from '~/hooks/useDiskDisplayData'
 import CircularGauge from '~/components/systeminfo/CircularGauge'
@@ -13,7 +14,8 @@ import StatusCard from '~/components/systeminfo/StatusCard'
 import { IconCpu, IconDatabase, IconServer, IconDeviceDesktop, IconComponents } from '@tabler/icons-react'
 
 export default function SettingsPage(props: {
-  system: { info: SystemInformationResponse | undefined }
+  // systeminformation's types are interfaces, which Inertia 5's JSON prop check rejects.
+  system: { info: SerializeJSONTypes<SystemInformationResponse> | undefined }
 }) {
   const { data: info } = useSystemInfo({
     initialData: props.system.info,

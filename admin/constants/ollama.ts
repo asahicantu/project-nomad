@@ -1,4 +1,4 @@
-import { NomadOllamaModel, ResponseStyle, SamplerProfile } from '../types/ollama.js'
+import { type NomadOllamaModel, type ResponseStyle, type SamplerProfile } from '../types/ollama.js'
 
 /**
  * Fallback basic recommended Ollama models in case fetching from the service fails.

@@ -1,4 +1,4 @@
-import { Notification } from "~/context/NotificationContext"
+import { type Notification } from "~/context/NotificationContext"
 
 // Global notification callback that can be set by the NotificationProvider
 let globalNotificationCallback: ((notification: Notification) => void) | null = null

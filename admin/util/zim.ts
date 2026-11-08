@@ -1,4 +1,4 @@
-import { RawListRemoteZimFilesResponse, RawRemoteZimFileEntry } from '../types/zim.js'
+import { type RawListRemoteZimFilesResponse, type RawRemoteZimFileEntry } from '../types/zim.js'
 
 export function isRawListRemoteZimFilesResponse(obj: any): obj is RawListRemoteZimFilesResponse {
   if (!(obj && typeof obj === 'object' && 'feed' in obj)) {

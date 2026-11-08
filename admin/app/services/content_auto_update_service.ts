@@ -2,7 +2,7 @@ import logger from '@adonisjs/core/services/logger'
 import { DateTime } from 'luxon'
 import KVStore from '#models/kv_store'
 import InstalledResource from '#models/installed_resource'
-import { DownloadService } from '#services/download_service'
+import { type DownloadService } from '#services/download_service'
 import { CollectionUpdateService } from '#services/collection_update_service'
 import { DrugReferenceService } from '#services/drug_reference_service'
 import {

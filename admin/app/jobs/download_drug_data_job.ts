@@ -1,4 +1,4 @@
-import { Job } from 'bullmq'
+import { type Job } from 'bullmq'
 import { access, mkdir, constants } from 'node:fs/promises'
 import logger from '@adonisjs/core/services/logger'
 import { QueueService } from '#services/queue_service'

@@ -1,5 +1,5 @@
 import api from "~/lib/api"
-import { CheckLatestVersionResult } from "../../types/system"
+import { type CheckLatestVersionResult } from "../../types/system"
 import { useQuery } from "@tanstack/react-query"
 
 

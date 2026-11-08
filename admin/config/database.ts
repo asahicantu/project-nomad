@@ -20,6 +20,8 @@ const dbConfig = defineConfig({
         max: 15,
         acquireTimeoutMillis: 10000, // Fail fast (10s) instead of silently hanging for ~60s
       },
+      // Lucid 22 writes database/schema.ts on every migration:run by default; the models don't use it.
+      schemaGeneration: { enabled: false },
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],

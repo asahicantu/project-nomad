@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.24.4
 
 # Install Docker CLI for compose operations
 RUN apk add --no-cache docker-cli docker-cli-compose bash jq

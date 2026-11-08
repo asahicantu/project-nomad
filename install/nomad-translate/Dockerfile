@@ -4,7 +4,7 @@
 # x86 specific and there is no aarch64 wheel. ARM would need marian's `ruy`
 # path. The build workflow pins linux/amd64 so this fails loudly at build time
 # rather than pulling cleanly on ARM and dying at start.
-FROM python:3.10-slim
+FROM python:3.10.22-slim-trixie
 
 # Pinned to python 3.10 because that is what bergamot 0.4.5 publishes wheels
 # for. On 3.12 pip resolves no further than 0.1.2 and the build fails outright.
@@ -15,7 +15,16 @@ FROM python:3.10-slim
 # real commit was 2024-05 and the maintained successor is mozilla/translations
 # (inference/). Moving to a build from that repo is tracked as follow-up work
 # and would remove this pin.
-RUN pip install --no-cache-dir bergamot==0.4.5
+#
+# Python 3.10 is past upstream EOL (2026-10), so 3.10.22 is the last release.
+# The pip/setuptools the base image ships carry known CVEs (pip-audit), so they
+# are upgraded here, and bergamot's unpinned transitive deps are pinned to the
+# versions pip-audit reported clean. Bump them together.
+RUN pip install --no-cache-dir --upgrade pip==26.3 setuptools==84.2.1 \
+ && pip install --no-cache-dir \
+      bergamot==0.4.5 \
+      requests==2.34.2 urllib3==2.8.0 certifi==2026.10.23 idna==3.20 \
+      charset-normalizer==3.5.2 PyYAML==6.0.3 appdirs==1.4.4
 
 WORKDIR /app
 COPY blocks.py proxy.py fetch_models.py entrypoint.sh /app/

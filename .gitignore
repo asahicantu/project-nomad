@@ -83,3 +83,6 @@ __pycache__/
 
 # Claude Code personal files
 CLAUDE.local.md
+
+
+.playwright-mcp

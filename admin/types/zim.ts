@@ -1,4 +1,4 @@
-import { FileEntry } from './files.js'
+import { type FileEntry } from './files.js'
 
 export type ZimFileWithMetadata = FileEntry & {
   title: string | null

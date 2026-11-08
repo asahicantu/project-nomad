@@ -1,5 +1,5 @@
-import { Job, UnrecoverableError } from 'bullmq'
-import { RunDownloadJobParams, DownloadProgressData } from '../../types/downloads.js'
+import { type Job, UnrecoverableError } from 'bullmq'
+import { type RunDownloadJobParams, type DownloadProgressData } from '../../types/downloads.js'
 import { QueueService } from '#services/queue_service'
 import { doResumableDownload, GatedContentAuthError } from '../utils/downloads.js'
 import { createHash } from 'crypto'

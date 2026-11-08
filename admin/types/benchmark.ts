@@ -1,4 +1,4 @@
-import BenchmarkResult from '#models/benchmark_result'
+import type BenchmarkResult from '#models/benchmark_result'
 
 // Benchmark type identifiers
 export type BenchmarkType = 'full' | 'system' | 'ai'

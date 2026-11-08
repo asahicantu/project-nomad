@@ -1,4 +1,4 @@
-import { Job } from 'bullmq'
+import { type Job } from 'bullmq'
 import { promises as fsPromises } from 'node:fs'
 import { access, constants } from 'node:fs/promises'
 import { Writable } from 'node:stream'

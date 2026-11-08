@@ -1,4 +1,4 @@
-import { Job, UnrecoverableError } from 'bullmq'
+import { type Job, UnrecoverableError } from 'bullmq'
 import { QueueService } from '#services/queue_service'
 import { createHash } from 'crypto'
 import logger from '@adonisjs/core/services/logger'

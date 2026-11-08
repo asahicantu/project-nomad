@@ -1,5 +1,5 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query'
-import { SystemInformationResponse } from '../../types/system'
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
+import { type SystemInformationResponse } from '../../types/system'
 import api from '~/lib/api'
 
 export type UseSystemInfoProps = Omit<

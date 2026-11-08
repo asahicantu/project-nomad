@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { FileEntry } from '../../types/files'
+import { type FileEntry } from '../../types/files'
 import api from '~/lib/api'
 
 const useMapRegionFiles = () => {

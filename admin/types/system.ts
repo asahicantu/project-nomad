@@ -1,4 +1,4 @@
-import { Systeminformation } from 'systeminformation'
+import { type Systeminformation } from 'systeminformation'
 
 export type GpuHealthStatus = {
   status: 'ok' | 'passthrough_failed' | 'no_gpu' | 'ollama_not_installed'

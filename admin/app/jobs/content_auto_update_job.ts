@@ -1,4 +1,4 @@
-import { Job } from 'bullmq'
+import { type Job } from 'bullmq'
 import { QueueService } from '#services/queue_service'
 import { DownloadService } from '#services/download_service'
 import { ContentAutoUpdateService } from '#services/content_auto_update_service'

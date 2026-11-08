@@ -1,6 +1,6 @@
-import { Job, UnrecoverableError } from 'bullmq'
+import { type Job, UnrecoverableError } from 'bullmq'
 import { QueueService } from '#services/queue_service'
-import { EmbedJobWithProgress } from '../../types/rag.js'
+import { type EmbedJobWithProgress } from '../../types/rag.js'
 import { RagService } from '#services/rag_service'
 import { DockerService } from '#services/docker_service'
 import { OllamaService } from '#services/ollama_service'

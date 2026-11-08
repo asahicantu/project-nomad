@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { XMLParser } from 'fast-xml-parser'
-import { DateTime } from 'luxon'
+import { type DateTime } from 'luxon'
 import logger from '@adonisjs/core/services/logger'
-import InstalledResource from '#models/installed_resource'
+import type InstalledResource from '#models/installed_resource'
 import { isRawListRemoteZimFilesResponse } from '../../util/zim.js'
 import { KIWIX_CATALOG_BASE_URL } from '../../constants/kiwix.js'
 

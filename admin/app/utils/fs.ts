@@ -1,8 +1,8 @@
 import { mkdir, open, readdir, readFile, stat, unlink } from 'fs/promises'
 import path, { join } from 'path'
-import { FileEntry } from '../../types/files.js'
+import { type FileEntry } from '../../types/files.js'
 import { createReadStream } from 'fs'
-import { LSBlockDevice, NomadDiskInfoRaw } from '../../types/system.js'
+import { type LSBlockDevice, type NomadDiskInfoRaw } from '../../types/system.js'
 
 export const ZIM_STORAGE_PATH = '/storage/zim'
 export const KIWIX_LIBRARY_XML_PATH = '/storage/zim/kiwix-library.xml'

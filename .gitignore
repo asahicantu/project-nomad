@@ -63,7 +63,11 @@ server/temp
 
 # Agent Files
 .agents
-.claude
+.claude/*
+!.claude/settings.json
+!.claude/skills/
+!.claude/hooks/
+!.claude/agents/
 .codegraph
 .mcp.json
 
@@ -76,3 +80,6 @@ admin/storage
 # Python bytecode (install/nomad-translate helper scripts)
 __pycache__/
 *.pyc
+
+# Claude Code personal files
+CLAUDE.local.md

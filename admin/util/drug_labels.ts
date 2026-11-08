@@ -556,3 +556,25 @@ export function deriveIngestPhase(
   if (rowCount > 0) return 'ready'
   return 'idle'
 }
+
+/**
+ * Load stream-json and return a sync factory for the stages of an openFDA part:
+ * `{ meta, results: [...] }` in, one `{ key, value }` per `results` element out.
+ * stream-json 3 factories return functions for stream-chain, so `.asStream()`
+ * gives the Node Duplexes the ingest job `.pipe()`s together. Awaited in the
+ * job's async body so an import failure rejects loudly instead of throwing
+ * inside yauzl's callback; dynamic import keeps this module loadable without
+ * stream-json.
+ */
+export async function loadResultsArrayStreams() {
+  const [{ parser }, { pick }, { streamArray }] = await Promise.all([
+    import('stream-json'),
+    import('stream-json/filters/pick.js'),
+    import('stream-json/streamers/stream-array.js'),
+  ])
+  return () => ({
+    jsonParser: parser.asStream({ jsonStreaming: false }),
+    pick: pick.asStream({ filter: 'results' }),
+    streamArray: streamArray.asStream(),
+  })
+}

@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Layout and commands
 
-- All app code is in `admin/` (AdonisJS 6 + Inertia/React 19, MySQL, Redis/BullMQ). The root `package.json` holds only the semantic-release version. Run every npm/ace command from `admin/`.
+- All app code is in `admin/` (AdonisJS 7 + Inertia 3/React 19, Node 24+, MySQL, Redis/BullMQ). The root `package.json` holds only the semantic-release version. Run every npm/ace command from `admin/`.
 - Two test runners:
-  - `npm run test:unit` uses `node:test` + `node:assert/strict` and needs no DB. Run a single spec with `node --import ts-node-maintained/register/esm --test tests/unit/<name>.spec.ts`.
+  - `npm run test:unit` uses `node:test` + `node:assert/strict` and needs no DB. Run a single spec with `node --import @poppinss/ts-exec --test tests/unit/<name>.spec.ts`.
   - `npm run test` is Japa (`node ace test`) and needs MySQL + Redis running.
 - `npm run typecheck` does not cover `admin/inertia/`, which has its own tsconfig (`npx tsc --noEmit -p inertia`).
 - CI only runs `npm run build` on PRs. Before calling a change done, run `typecheck`, `lint`, `test:unit` and `build` (or `/verify`).
